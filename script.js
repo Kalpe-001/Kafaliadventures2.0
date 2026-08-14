@@ -362,8 +362,14 @@ function initForm() {
         throw new Error(result.error || "Request failed");
       }
 
+      // Clear the form and show success message
       form.reset();
       success.hidden = false;
+
+      // Hide success message after 6 seconds
+      setTimeout(() => {
+        success.hidden = true;
+      }, 6000);
 
     } catch (err) {
       console.error("Contact form error:", err);
