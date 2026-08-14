@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b2545" />
+    <title>Trek Details — Altura Expeditions</title>
+    <meta name="description" content="Full itinerary, trip facts, inclusions and booking details for your Altura Expeditions trek." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="container header__inner">
+        <a href="index.html#home" class="brand" aria-label="Altura Expeditions home">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+          </span>
+          Altura
+        </a>
+
+        <nav class="nav" id="nav" aria-label="Primary">
+          <a class="nav__link" href="index.html#about">About</a>
+          <a class="nav__link" href="index.html#packages">Packages</a>
+          <a class="nav__link" href="index.html#testimonials">Reviews</a>
+          <a class="nav__link" href="index.html#contact">Contact</a>
+          <a class="btn btn--primary" id="navBookBtn" href="#book">Book Now</a>
+        </nav>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="trekMain" hidden>
+      <!-- Hero (populated by trek.js) -->
+      <section class="trek-hero" id="trekHero">
+        <img class="trek-hero__bg" id="trekHeroImg" src="" alt="" />
+        <div class="container trek-hero__inner">
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <a href="index.html#home">Home</a>
+            <span aria-hidden="true">/</span>
+            <a href="index.html#packages">Treks</a>
+            <span aria-hidden="true">/</span>
+            <span id="crumbName" aria-current="page"></span>
+          </nav>
+          <span class="trek-hero__tag" id="trekHeroTag"></span>
+          <h1 class="trek-hero__title" id="trekHeroTitle"></h1>
+          <p class="trek-hero__meta" id="trekHeroMeta"></p>
+        </div>
+      </section>
+
+      <!-- Quick facts -->
+      <section class="section trek-facts-section">
+        <div class="container">
+          <div class="trek-facts__head reveal">
+            <div>
+              <span class="eyebrow">Trip Facts</span>
+              <h2 class="section__title">Everything at a glance</h2>
+            </div>
+            <div class="trek-facts__price" id="trekPriceBox"></div>
+          </div>
+          <ul class="trek-facts" id="trekFacts"></ul>
+        </div>
+      </section>
+
+      <!-- Destination overview -->
+      <section class="section trek-overview-section">
+        <div class="container trek-overview">
+          <div class="trek-overview__main reveal">
+            <span class="eyebrow">The Destination</span>
+            <h2 class="section__title" id="overviewHeading"></h2>
+            <div id="overviewText"></div>
+            <!-- Add your own custom copy, maps or media below -->
+            <div class="custom-slot" aria-hidden="true">
+              <span>Custom content area — add your own text, images or maps here.</span>
+            </div>
+          </div>
+          <aside class="trek-overview__aside reveal">
+            <h3 class="trek-aside__title">Trip highlights</h3>
+            <ul class="trek-highlights" id="trekHighlights"></ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Itinerary -->
+      <section class="section trek-itinerary-section">
+        <div class="container">
+          <div class="section__head reveal">
+            <span class="eyebrow">Day by Day</span>
+            <h2 class="section__title">Your itinerary</h2>
+            <p class="section__subtitle">
+              A suggested day-by-day plan. Every departure can be tailored — talk
+              to us about custom dates, pacing and add-ons.
+            </p>
+          </div>
+          <ol class="itinerary" id="itinerary"></ol>
+        </div>
+      </section>
+
+      <!-- Inclusions / Exclusions -->
+      <section class="section trek-incl-section">
+        <div class="container">
+          <div class="section__head reveal">
+            <span class="eyebrow">The Details</span>
+            <h2 class="section__title">What's included</h2>
+          </div>
+          <div class="incl-grid">
+            <div class="incl-col incl-col--yes reveal">
+              <h3><span class="incl-icon incl-icon--yes" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </span> Inclusions</h3>
+              <ul id="inclList"></ul>
+            </div>
+            <div class="incl-col incl-col--no reveal">
+              <h3><span class="incl-icon incl-icon--no" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              </span> Exclusions</h3>
+              <ul id="exclList"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Book CTA -->
+      <section class="cta" id="book">
+        <img class="cta__bg" id="bookCtaBg" src="" alt="" aria-hidden="true" />
+        <div class="container cta__inner reveal">
+          <h2 class="cta__title" id="bookCtaTitle"></h2>
+          <p class="cta__text">
+            Secure your spot on this expedition. No payment is taken until we've
+            confirmed your dates and availability.
+          </p>
+          <div class="cta__actions">
+            <a class="btn btn--light" id="bookCtaBtn" href="#">Book This Trek</a>
+            <a class="btn btn--outline-light" href="index.html#packages">Browse Other Treks</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Undecided CTA -->
+      <section class="section undecided">
+        <div class="container undecided__inner reveal">
+          <div class="undecided__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <h2 class="undecided__title">Still undecided about your next adventure?</h2>
+          <p class="undecided__text">
+            Not sure if this trek is the right fit, or torn between two routes?
+            Our expedition planners have walked these trails themselves — tell us
+            about your experience and goals, and we'll point you to the perfect
+            journey.
+          </p>
+          <a class="btn btn--primary" href="index.html#contact">Reach Out to Us</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Not found state -->
+    <section class="section notfound" id="trekNotFound" hidden>
+      <div class="container notfound__inner">
+        <h1 class="section__title">Trek not found</h1>
+        <p class="section__subtitle">We couldn't find that expedition. Browse all of our treks instead.</p>
+        <a class="btn btn--primary" href="index.html#packages">View All Treks</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__grid">
+          <div>
+            <a href="index.html#home" class="brand">
+              <span class="brand__mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+              </span>
+              Altura
+            </a>
+            <p class="footer__about">
+              Guided trekking expeditions across the world's greatest mountain
+              ranges. Adventure responsibly, travel unforgettably.
+            </p>
+            <div class="footer__socials">
+              <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
+              <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+              <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.29 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+            </div>
+          </div>
+
+          <div class="footer__col">
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="index.html#about">About Us</a></li>
+              <li><a href="index.html#packages">All Treks</a></li>
+              <li><a href="index.html#testimonials">Reviews</a></li>
+              <li><a href="index.html#contact">Book Now</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Gear Checklist</a></li>
+              <li><a href="#">Travel Insurance</a></li>
+              <li><a href="#">Cancellation Policy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Sustainability</a></li>
+              <li><a href="#">Partners</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <span>&copy; <span id="year"></span> Altura Expeditions. All rights reserved.</span>
+          <span>Privacy Policy · Terms of Service</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="trek.js"></script>
+  </body>
+</html>

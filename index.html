@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b2545" />
+    <title>Kafali Adventures — Guided Treks &amp; Mountain Adventures</title>
+    <meta
+      name="description"
+      content="Altura Expeditions leads unforgettable guided treks across the world's greatest mountain ranges. Explore 14 curated trekking packages and book your next adventure."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="container header__inner">
+        <a href="#home" class="brand" aria-label="Kafali Adventures home">
+          <span class="brand__mark" aria-hidden="true">
+             </span>Kafali Adventures
+        </a>
+
+        <nav class="nav" id="nav" aria-label="Primary">
+          <a class="nav__link" href="#about">About</a>
+          <a class="nav__link" href="#packages">Packages</a>
+          <a class="nav__link" href="#testimonials">Reviews</a>
+          <a class="nav__link" href="#contact">Contact</a>
+          <a class="btn btn--primary" href="#contact">Book Now</a>
+        </nav>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero" id="home">
+        <img class="hero__bg" src="images/hero.jpg" alt="Scenic view of a mountain with colorful buddhist flags hanging around" />
+        <div class="container hero__inner">
+          <span class="hero__badge"><span class="dot"></span> Trusted by 75+ adventurers</span>
+          <h1 class="hero__title">Welcome to Kafali Adventures — where every trail tells a story.</h1>
+          <p class="hero__text">
+            Guided treks across the world's most breathtaking mountain ranges,
+            crafted for explorers of every level. Your next great adventure
+            starts here.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--light" href="#packages">Explore Packages</a>
+            <a class="btn btn--outline-light" href="#contact">Book Now</a>
+          </div>
+          <div class="hero__stats">
+            <div class="hero__stat"><strong>14</strong><span>Curated Treks</span></div>
+            <div class="hero__stat"><strong>2+</strong><span>Years Guiding</span></div>
+            <div class="hero__stat"><strong>4.7/5</strong><span>Traveler Rating</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="section" id="about">
+        <div class="container about__grid">
+          <div class="about__media reveal">
+            <img src="images/about.png" alt="A small group of trekkers hiking an alpine trail with mountain guides" />
+            <div class="about__badge">
+              <strong>55+</strong>
+              <span>Satisfied Travellers</span>
+            </div>
+          </div>
+          <div class="about__content reveal">
+            <span class="eyebrow">About Kafali</span>
+            <h2 class="about__title">Small groups, expert guides, unforgettable journeys.</h2>
+            <p class="about__text">
+              Kafali Adventure is a locally rooted trekking and travel company built with one simple idea; to show the real Nepal, not the packaged version of it.
+We are based in Western Nepal, where mountains are quieter, trails are less crowded, and stories are deeper than just destinations. Every journey we design is guided by local knowledge, lived experience, and respect for the land we call home.
+
+            </p>
+            <p class="about__text">
+Our team consists of experienced local guides, mountain trekkers, and field experts who have spent years navigating the routes of Saipal, Api, Khaptad, Rara, and the remote Himalayan valleys.
+
+            </p>
+            <ul class="about__features">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                Certified local guides
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                Small group sizes
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                24/7 trail support
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                Sustainable travel
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Packages -->
+      <section class="section packages" id="packages">
+        <div class="container">
+          <div class="section__head center reveal">
+            <span class="eyebrow">Our Expeditions</span>
+            <h2 class="section__title">14 trekking packages to choose from</h2>
+            <p class="section__subtitle">
+              From gentle valley walks to demanding high-altitude base camps, find
+              the journey that matches your spirit.
+            </p>
+          </div>
+
+          <div class="filters reveal" id="filters">
+            <button class="filter active" data-filter="all">All</button>
+            <button class="filter" data-filter="Easy">Easy</button>
+            <button class="filter" data-filter="Moderate">Moderate</button>
+            <button class="filter" data-filter="Challenging">Challenging</button>
+          </div>
+
+          <div class="grid" id="packageGrid"></div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="section" id="testimonials">
+        <div class="container">
+          <div class="section__head center reveal">
+            <span class="eyebrow">Traveler Stories</span>
+            <h2 class="section__title">What our trekkers say</h2>
+          </div>
+          <div class="testimonials__grid" id="testimonialGrid"></div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta">
+        <img class="cta__bg" src="images/trek-7.png" alt="" aria-hidden="true" />
+        <div class="container cta__inner reveal">
+          <h2 class="cta__title">Ready to lace up your boots?</h2>
+          <p class="cta__text">
+            Your next adventure is closer than you think.
+           Choose your trek, pick your dates, and let us take care of the rest.
+          </p>
+          <div class="cta__actions">
+            <a class="btn btn--light" href="#contact">Book Now</a>
+            <a class="btn btn--outline-light" href="#packages">Browse Treks</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="section contact" id="contact">
+        <div class="container contact__grid">
+          <div class="reveal">
+            <span class="eyebrow">Get in Touch</span>
+            <h2 class="section__title">Book your adventure</h2>
+            <p class="section__subtitle">
+              Fill out the form and our expedition planners will reach out
+              within 24 hours.
+            </p>
+            <ul class="contact__list">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+                kafaliadventures@gmail.com
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +977 974‑3518422
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Galli no 4, Mahendranagar, Kanchanpur
+              </li>
+            </ul>
+          </div>
+
+          <form class="form reveal" id="bookingForm" novalidate>
+            <div class="form__row">
+              <div class="field">
+                <label for="name">Full name</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="john@email.com" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="trek">Which trek?</label>
+              <select id="trek" name="trek" required>
+                <option value="" disabled selected>Select a package</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">Tell us about your trip</label>
+              <textarea id="message" name="message" placeholder="Group size, dates, experience level..."></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary">Request Booking</button>
+            <p class="form__note">No payment required to enquire. We'll confirm availability first.</p>
+            <div class="form__success" id="formSuccess">Thanks! Your request is on its way! we'll be in touch within 24 hours.</div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__grid">
+          <div>
+            <a href="#home" class="brand">
+              <span class="brand__mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+              </span>
+              Altura
+            </a>
+            <p class="footer__about">
+              Guided trekking expeditions across the world's greatest mountain
+              ranges. Adventure responsibly, travel unforgettably.
+            </p>
+            <div class="footer__socials">
+              <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
+              <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+              <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.29 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+            </div>
+          </div>
+
+          <div class="footer__col">
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#packages">All Treks</a></li>
+              <li><a href="#testimonials">Reviews</a></li>
+              <li><a href="#contact">Book Now</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Gear Checklist</a></li>
+              <li><a href="#">Travel Insurance</a></li>
+              <li><a href="#">Cancellation Policy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h4>Company</h4>
+            <ul>
+              <li style="display: none;"><a href="#">Careers</a></li>
+              <li><a href="#">Sustainability</a></li>
+              <li><a href="#">Partners</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <span>&copy; <span id="year"></span> Kafali Adventures. All rights reserved.</span>
+          <span>Privacy Policy · Terms of Service</span>
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
