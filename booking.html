@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b2545" />
+    <title>Book Your Trek — Kafali Adventures</title>
+    <meta
+      name="description"
+      content="Reserve your spot on a guided Kafali Adventures trek in Western Nepal. Fill out our booking form and our team will confirm availability within 24 hours."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Reuse the existing site stylesheet for a consistent look -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Booking-page specific styles (scoped additions only) -->
+    <style>
+      .booking-hero {
+        position: relative;
+        background-color: var(--navy-900);
+        color: var(--paper);
+        padding-block: clamp(3rem, 8vw, 5rem);
+        overflow: hidden;
+      }
+
+      .booking-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          120% 120% at 100% 0%,
+          rgba(19, 64, 116, 0.55),
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+
+      .booking-hero .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .booking-hero .eyebrow {
+        color: var(--slate);
+      }
+
+      .booking-hero__title {
+        color: var(--paper);
+        font-size: clamp(1.9rem, 4.5vw, 3rem);
+        max-width: 18ch;
+      }
+
+      .booking-hero__text {
+        margin-top: 1rem;
+        max-width: 52ch;
+        color: rgba(238, 244, 237, 0.82);
+        font-size: 1.05rem;
+      }
+
+      .booking-layout {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: clamp(2rem, 5vw, 4rem);
+        align-items: start;
+      }
+
+      .booking-aside__title {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+      }
+
+      .booking-aside__text {
+        margin-top: 0.9rem;
+        color: var(--muted);
+      }
+
+      .booking-steps {
+        list-style: none;
+        padding: 0;
+        margin-top: 1.75rem;
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      .booking-steps li {
+        display: flex;
+        gap: 0.9rem;
+        align-items: flex-start;
+      }
+
+      .booking-steps .step__num {
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background-color: var(--navy-500);
+        color: var(--paper);
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+
+      .booking-steps .step__body strong {
+        display: block;
+        font-family: var(--font-display);
+        color: var(--navy-900);
+        margin-bottom: 0.15rem;
+      }
+
+      .booking-steps .step__body span {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .booking-contact {
+        list-style: none;
+        padding: 0;
+        margin-top: 2rem;
+        display: grid;
+        gap: 1rem;
+      }
+
+      .booking-contact li {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        color: var(--navy-700);
+        font-weight: 500;
+      }
+
+      .booking-contact svg {
+        width: 20px;
+        height: 20px;
+        color: var(--navy-500);
+        flex-shrink: 0;
+      }
+
+      .form__title {
+        font-size: 1.35rem;
+        margin-bottom: 0.35rem;
+      }
+
+      .form__intro {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .field .required {
+        color: #b23b3b;
+      }
+
+      @media (max-width: 860px) {
+        .booking-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .form__row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header" id="header">
+      <div class="container header__inner">
+        <a href="index.html#home" class="brand" aria-label="Kafali Adventures home">
+          <span class="brand__mark" aria-hidden="true"></span>Kafali Adventures
+        </a>
+
+        <nav class="nav" id="nav" aria-label="Primary">
+          <a class="nav__link" href="index.html#about">About</a>
+          <a class="nav__link" href="index.html#packages">Packages</a>
+          <a class="nav__link" href="index.html#testimonials">Reviews</a>
+          <a class="nav__link" href="index.html#contact">Contact</a>
+          <a class="btn btn--primary" href="booking.html">Book Now</a>
+        </nav>
+
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="nav"
+        >
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Booking hero -->
+      <section class="booking-hero">
+        <div class="container">
+          <span class="eyebrow">Reserve Your Journey</span>
+          <h1 class="booking-hero__title">Book your next adventure with Kafali</h1>
+          <p class="booking-hero__text">
+            Tell us which trail calls to you and a few details about your trip.
+            Our local team will check availability and get back to you within 24
+            hours — no payment required to enquire.
+          </p>
+        </div>
+      </section>
+
+      <!-- Booking form section -->
+      <section class="section">
+        <div class="container booking-layout">
+          <!-- Aside: how it works + contact -->
+          <aside class="booking-aside">
+            <span class="eyebrow">How It Works</span>
+            <h2 class="booking-aside__title">Three simple steps to the trail</h2>
+            <p class="booking-aside__text">
+              We keep group sizes small and every departure guide-led. Here's what
+              happens after you send your request.
+            </p>
+
+            <ol class="booking-steps">
+              <li>
+                <span class="step__num">1</span>
+                <span class="step__body">
+                  <strong>Send your request</strong>
+                  <span>Fill out the form with your preferred trek and dates.</span>
+                </span>
+              </li>
+              <li>
+                <span class="step__num">2</span>
+                <span class="step__body">
+                  <strong>We confirm availability</strong>
+                  <span>A guide reviews your trip and replies within 24 hours.</span>
+                </span>
+              </li>
+              <li>
+                <span class="step__num">3</span>
+                <span class="step__body">
+                  <strong>Finalize &amp; pack</strong>
+                  <span>We share your itinerary, gear list, and next steps.</span>
+                </span>
+              </li>
+            </ol>
+
+            <ul class="booking-contact">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +977 98XXXXXXXX
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+                hello@kafaliadventures.com
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Galli no 4, Mahendranagar, Kanchanpur
+              </li>
+            </ul>
+          </aside>
+
+          <!-- Booking form -->
+          <form class="form" id="bookingForm" novalidate>
+            <h2 class="form__title">Booking request</h2>
+            <p class="form__intro">
+              Fields marked with <span class="required">*</span> are required.
+            </p>
+
+            <div class="form__row">
+              <div class="field">
+                <label for="fullName">Full name <span class="required">*</span></label>
+                <input type="text" id="fullName" name="fullName" autocomplete="name" placeholder="John Doe" required />
+              </div>
+              <div class="field">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="john@email.com" required />
+              </div>
+            </div>
+
+            <div class="form__row">
+              <div class="field">
+                <label for="phone">Phone number <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+977 98XXXXXXXX" required />
+              </div>
+              <div class="field">
+                <label for="trek">Trek / package <span class="required">*</span></label>
+                <select id="trek" name="trek" required>
+                  <option value="" disabled selected>Select a package</option>
+                  <optgroup label="Trekking">
+                    <option value="saipal">Saipal Base Camp Trek</option>
+                    <option value="api">Api Base Camp Trek</option>
+                    <option value="khaptad">Khaptad National Park Trek</option>
+                    <option value="rara">Rara Lake Trek</option>
+                    <option value="phoksundo">Shey Phoksundo Trek</option>
+                    <option value="mustang">Upper Mustang Trek</option>
+                    <option value="ramaroshan">Ramaroshan Trek</option>
+                  </optgroup>
+                  <optgroup label="Adventures &amp; Activities">
+                    <option value="hiking">Hiking &amp; Safari</option>
+                    <option value="biking">Mountain Biking</option>
+                    <option value="rafting">River Rafting</option>
+                    <option value="angling">Angling</option>
+                    <option value="junglewalk">Jungle Walk</option>
+                  </optgroup>
+                  <option value="other">Other / Not sure yet</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form__row">
+              <div class="field">
+                <label for="travelDate">Preferred travel date <span class="required">*</span></label>
+                <input type="date" id="travelDate" name="travelDate" required />
+              </div>
+              <div class="field">
+                <label for="travelers">Number of travelers <span class="required">*</span></label>
+                <input type="number" id="travelers" name="travelers" min="1" max="30" step="1" value="1" required />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">Message / special requests</label>
+              <textarea id="message" name="message" placeholder="Experience level, dietary needs, accessibility, budget, or anything else we should know..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary">Submit Booking</button>
+            <p class="form__note">
+              No payment required to enquire. We'll confirm availability first.
+            </p>
+            <div class="form__success" id="formSuccess" role="status" aria-live="polite">
+              Thanks! Your booking request is on its way — we'll be in touch within 24 hours.
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__grid">
+          <div>
+            <a href="index.html#home" class="brand">
+              <span class="brand__mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+              </span>
+              Kafali Adventures
+            </a>
+            <p class="footer__about">
+              Guided trekking expeditions across Western Nepal's greatest mountain
+              ranges. Adventure responsibly, travel unforgettably.
+            </p>
+            <div class="footer__socials">
+              <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
+              <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+              <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.29 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+            </div>
+          </div>
+
+          <div class="footer__col">
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="index.html#about">About Us</a></li>
+              <li><a href="index.html#packages">All Treks</a></li>
+              <li><a href="index.html#testimonials">Reviews</a></li>
+              <li><a href="booking.html">Book Now</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Gear Checklist</a></li>
+              <li><a href="#">Travel Insurance</a></li>
+              <li><a href="#">Cancellation Policy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">Sustainability</a></li>
+              <li><a href="#">Partners</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <span>&copy; <span id="year"></span> Kafali Adventures. All rights reserved.</span>
+          <span>Privacy Policy · Terms of Service</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Lightweight page interactions only. No backend / no form submission logic —
+      // wire #bookingForm up to your own JavaScript backend later.
+      (function () {
+        // Footer year
+        var yearEl = document.getElementById("year");
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+        // Mobile nav toggle
+        var navToggle = document.getElementById("navToggle");
+        var nav = document.getElementById("nav");
+        if (navToggle && nav) {
+          navToggle.addEventListener("click", function () {
+            var open = nav.classList.toggle("open");
+            navToggle.setAttribute("aria-expanded", String(open));
+          });
+        }
+
+        // Sticky header shadow on scroll
+        var header = document.getElementById("header");
+        if (header) {
+          window.addEventListener("scroll", function () {
+            header.classList.toggle("scrolled", window.scrollY > 10);
+          });
+        }
+
+        // Set the date input's minimum to today so past dates can't be picked
+        var travelDate = document.getElementById("travelDate");
+        if (travelDate) {
+          travelDate.min = new Date().toISOString().split("T")[0];
+        }
+
+        // Safety net: this standalone page doesn't load the main site's
+        // IntersectionObserver, so make sure any ".reveal" elements are shown.
+        document.querySelectorAll(".reveal").forEach(function (el) {
+          el.classList.add("visible");
+        });
+      })();
+    </script>
+  </body>
+</html>
