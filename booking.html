@@ -435,7 +435,47 @@
         document.querySelectorAll(".reveal").forEach(function (el) {
           el.classList.add("visible");
         });
-      })();
+     const bookingForm = document.getElementById("bookingForm");
+const formSuccess = document.getElementById("formSuccess");
+
+if (bookingForm) {
+  bookingForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const submitButton = bookingForm.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.textContent = "Submitting...";
+
+    const formData = new FormData(bookingForm);
+    const booking = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch("/api/booking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(booking)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to submit booking.");
+      }
+
+      formSuccess.classList.add("visible");
+      bookingForm.reset();
+
+    } catch (error) {
+      console.error(error);
+      alert(error.message || "Something went wrong. Please try again.");
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "Submit Booking";
+    }
+  });
+}git  })();
     </script>
   </body>
 </html>
