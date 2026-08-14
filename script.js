@@ -356,24 +356,21 @@ function initForm() {
         ),
       });
 
-      const result = await response.json();
-
+      // Do NOT assume the API response contains JSON.
       if (!response.ok) {
-        throw new Error(result.error || "Request failed");
+        throw new Error(`Request failed: ${response.status}`);
       }
 
-      // Clear the form and show success message
+      // The request succeeded.
       form.reset();
-      success.hidden = false;
 
-      // Hide success message after 6 seconds
-      setTimeout(() => {
-        success.hidden = true;
-      }, 6000);
+      success.hidden = false;
+      error.hidden = true;
 
     } catch (err) {
       console.error("Contact form error:", err);
       error.hidden = false;
+      success.hidden = true;
 
     } finally {
       submitButton.disabled = false;
