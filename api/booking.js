@@ -8,7 +8,9 @@ const supabase = createClient(
 export default async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({
+      error: "Method not allowed"
+    });
   }
 
   try {
@@ -20,7 +22,7 @@ export default async function handler(req, res) {
       travelDate,
       travelers,
       message
-    } = req.body;
+    } = req.body || {};
 
     // Basic validation
     if (
@@ -57,7 +59,10 @@ export default async function handler(req, res) {
       console.error("Supabase error:", error);
 
       return res.status(500).json({
-        error: "Unable to save booking."
+        error: error.message,
+        details: error.details || null,
+        hint: error.hint || null,
+        code: error.code || null
       });
     }
 
@@ -70,7 +75,7 @@ export default async function handler(req, res) {
     console.error("Server error:", error);
 
     return res.status(500).json({
-      error: "Something went wrong."
+      error: error.message || "Something went wrong."
     });
   }
 }
