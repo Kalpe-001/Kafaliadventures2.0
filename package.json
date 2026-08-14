@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",
+    "resend": "^6.20.0",
     "serve": "^14.2.4"
   }
 }
