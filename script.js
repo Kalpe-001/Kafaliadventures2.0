@@ -321,31 +321,17 @@ function observeReveals() {
 }
 
 /* ---- Form submission ----------------------------------------------------- */
-/* ---- Form submission ----------------------------------------------------- */
 function initForm() {
-  const form = document.getElementById("bookingForm");
+  const form = document.getElementById("contactForm");
   const success = document.getElementById("formSuccess");
+  const error = document.getElementById("formError");
 
-  if (!form) return;
-
-  // Create an error message if one doesn't already exist
-  let error = document.getElementById("formError");
-
-  if (!error) {
-    error = document.createElement("div");
-    error.id = "formError";
-    error.className = "form__error";
-    error.hidden = true;
-    error.textContent =
-      "Something went wrong while sending your message. Please try again.";
-
-    form.appendChild(error);
-  }
+  if (!form || !success || !error) return;
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    success.classList.remove("show");
+    success.hidden = true;
     error.hidden = true;
 
     if (!form.checkValidity()) {
@@ -360,14 +346,14 @@ function initForm() {
     submitButton.textContent = "Sending...";
 
     try {
-      const formData = new FormData(form);
-
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(Object.fromEntries(formData)),
+        body: JSON.stringify(
+          Object.fromEntries(new FormData(form))
+        ),
       });
 
       const result = await response.json();
@@ -376,14 +362,8 @@ function initForm() {
         throw new Error(result.error || "Request failed");
       }
 
-      // Success
       form.reset();
-      success.classList.add("show");
-
-      // Hide success message after 6 seconds
-      setTimeout(() => {
-        success.classList.remove("show");
-      }, 6000);
+      success.hidden = false;
 
     } catch (err) {
       console.error("Contact form error:", err);
