@@ -321,61 +321,99 @@ function observeReveals() {
 }
 
 /* ---- Form submission ----------------------------------------------------- */
+/* ---- Form submission ----------------------------------------------------- */
 function initForm() {
   const form = document.getElementById("contactForm");
+  const submit = document.querySelector("#contactForm button[type='submit']");
   const success = document.getElementById("formSuccess");
   const error = document.getElementById("formError");
 
-  if (!form || !success || !error) return;
+  if (!form || !submit || !success || !error) {
+    console.error("Contact form elements not found.");
+    return;
+  }
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  form.querySelectorAll("input, select, textarea").forEach((field) => {
+    field.addEventListener("input", () => {
+      const fieldWrapper = field.closest(".field");
+
+      if (fieldWrapper) {
+        fieldWrapper.classList.remove("field--invalid");
+      }
+    });
+
+    field.addEventListener("change", () => {
+      const fieldWrapper = field.closest(".field");
+
+      if (fieldWrapper) {
+        fieldWrapper.classList.remove("field--invalid");
+      }
+    });
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
     success.hidden = true;
     error.hidden = true;
 
+    // Browser validation
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
 
-    const submitButton = form.querySelector('button[type="submit"]');
-
-    submitButton.disabled = true;
-    submitButton.setAttribute("aria-busy", "true");
-    submitButton.textContent = "Sending...";
+    submit.disabled = true;
+    submit.setAttribute("aria-busy", "true");
+    submit.textContent = "Sending...";
 
     try {
+      const formData = new FormData(form);
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(
-          Object.fromEntries(new FormData(form))
-        ),
+        body: JSON.stringify(Object.fromEntries(formData)),
       });
 
-      // Do NOT assume the API response contains JSON.
+      console.log("Contact API status:", response.status);
+
       if (!response.ok) {
-        throw new Error(`Request failed: ${response.status}`);
+        let errorMessage = "Request failed.";
+
+        try {
+          const result = await response.json();
+
+          if (result && result.error) {
+            errorMessage = result.error;
+          }
+        } catch (jsonError) {
+          console.warn("API did not return JSON.");
+        }
+
+        throw new Error(errorMessage);
       }
 
-      // The request succeeded.
+      // Successful submission
       form.reset();
 
       success.hidden = false;
       error.hidden = true;
 
-    } catch (err) {
-      console.error("Contact form error:", err);
-      error.hidden = false;
+      console.log("Contact form submitted successfully.");
+
+    } catch (requestError) {
+      console.error("Contact form error:", requestError);
+
       success.hidden = true;
+      error.hidden = false;
 
     } finally {
-      submitButton.disabled = false;
-      submitButton.removeAttribute("aria-busy");
-      submitButton.textContent = "Request Booking";
+      submit.disabled = false;
+      submit.removeAttribute("aria-busy");
+      submit.textContent = "Request Booking";
     }
   });
 }
