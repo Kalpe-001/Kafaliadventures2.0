@@ -156,6 +156,89 @@
         color: #b23b3b;
       }
 
+      /* Inline field-level validation messages */
+      .field__error {
+        display: none;
+        margin-top: 0.4rem;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        color: #b23b3b;
+      }
+
+      .field__error::before {
+        content: "";
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        margin-right: 0.4em;
+        vertical-align: -0.15em;
+        background-color: currentColor;
+        -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 5h2v7h-2V7zm0 9h2v2h-2v-2z'/></svg>") center / contain no-repeat;
+        mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 5h2v7h-2V7zm0 9h2v2h-2v-2z'/></svg>") center / contain no-repeat;
+      }
+
+      .field.field--invalid .field__error {
+        display: block;
+      }
+
+      .field.field--invalid input,
+      .field.field--invalid select,
+      .field.field--invalid textarea {
+        border-color: #b23b3b;
+        box-shadow: 0 0 0 2px rgba(178, 59, 59, 0.15);
+      }
+
+      /* Form-level error banner */
+      .form__error {
+        display: none;
+        margin-top: 1rem;
+        padding: 0.85rem 1rem;
+        border-radius: var(--radius, 10px);
+        border: 1px solid rgba(178, 59, 59, 0.35);
+        background-color: rgba(178, 59, 59, 0.08);
+        color: #8f2f2f;
+        font-size: 0.92rem;
+        line-height: 1.45;
+      }
+
+      .form__error.is-visible {
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+      }
+
+      .form__error::before {
+        content: "";
+        flex-shrink: 0;
+        width: 1.2em;
+        height: 1.2em;
+        background-color: currentColor;
+        -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 5h2v7h-2V7zm0 9h2v2h-2v-2z'/></svg>") center / contain no-repeat;
+        mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 5h2v7h-2V7zm0 9h2v2h-2v-2z'/></svg>") center / contain no-repeat;
+      }
+
+      /* Success state uses a check icon so meaning is not color-only */
+      .form__success.is-visible {
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+      }
+
+      .form__success.is-visible::before {
+        content: "";
+        flex-shrink: 0;
+        width: 1.2em;
+        height: 1.2em;
+        background-color: currentColor;
+        -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'/></svg>") center / contain no-repeat;
+        mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'/></svg>") center / contain no-repeat;
+      }
+
+      .btn[aria-busy="true"] {
+        opacity: 0.7;
+        cursor: progress;
+      }
+
       @media (max-width: 860px) {
         .booking-layout {
           grid-template-columns: 1fr;
@@ -273,22 +356,25 @@
             <div class="form__row">
               <div class="field">
                 <label for="fullName">Full name <span class="required">*</span></label>
-                <input type="text" id="fullName" name="fullName" autocomplete="name" placeholder="John Doe" required />
+                <input type="text" id="fullName" name="fullName" autocomplete="name" placeholder="John Doe" required aria-describedby="fullName-error" />
+                <p class="field__error" id="fullName-error"></p>
               </div>
               <div class="field">
                 <label for="email">Email <span class="required">*</span></label>
-                <input type="email" id="email" name="email" autocomplete="email" placeholder="john@email.com" required />
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="john@email.com" required aria-describedby="email-error" />
+                <p class="field__error" id="email-error"></p>
               </div>
             </div>
 
             <div class="form__row">
               <div class="field">
                 <label for="phone">Phone number <span class="required">*</span></label>
-                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+977 98XXXXXXXX" required />
+                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+977 98XXXXXXXX" required aria-describedby="phone-error" />
+                <p class="field__error" id="phone-error"></p>
               </div>
               <div class="field">
                 <label for="trek">Trek / package <span class="required">*</span></label>
-                <select id="trek" name="trek" required>
+                <select id="trek" name="trek" required aria-describedby="trek-error">
                   <option value="" disabled selected>Select a package</option>
                   <optgroup label="Trekking">
                     <option value="saipal">Saipal Base Camp Trek</option>
@@ -308,17 +394,20 @@
                   </optgroup>
                   <option value="other">Other / Not sure yet</option>
                 </select>
+                <p class="field__error" id="trek-error"></p>
               </div>
             </div>
 
             <div class="form__row">
               <div class="field">
                 <label for="travelDate">Preferred travel date <span class="required">*</span></label>
-                <input type="date" id="travelDate" name="travelDate" required />
+                <input type="date" id="travelDate" name="travelDate" required aria-describedby="travelDate-error" />
+                <p class="field__error" id="travelDate-error"></p>
               </div>
               <div class="field">
                 <label for="travelers">Number of travelers <span class="required">*</span></label>
-                <input type="number" id="travelers" name="travelers" min="1" max="30" step="1" value="1" required />
+                <input type="number" id="travelers" name="travelers" min="1" max="30" step="1" value="1" required aria-describedby="travelers-error" />
+                <p class="field__error" id="travelers-error"></p>
               </div>
             </div>
 
@@ -327,13 +416,12 @@
               <textarea id="message" name="message" placeholder="Experience level, dietary needs, accessibility, budget, or anything else we should know..."></textarea>
             </div>
 
-            <button type="submit" class="btn btn--primary">Submit Booking</button>
+            <button type="submit" class="btn btn--primary" id="submitBtn">Submit Booking</button>
             <p class="form__note">
               No payment required to enquire. We'll confirm availability first.
             </p>
-            <div class="form__success" id="formSuccess" role="status" aria-live="polite">
-              Thanks! Your booking request is on its way — we'll be in touch within 24 hours.
-            </div>
+            <p class="form__error" id="formError" role="alert"></p>
+            <div class="form__success" id="formSuccess" role="status" aria-live="polite" hidden></div>
           </form>
         </div>
       </section>
@@ -435,47 +523,217 @@
         document.querySelectorAll(".reveal").forEach(function (el) {
           el.classList.add("visible");
         });
-     const bookingForm = document.getElementById("bookingForm");
-const formSuccess = document.getElementById("formSuccess");
 
-if (bookingForm) {
-  bookingForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
+        /* -----------------------------------------------------------------
+         * Booking form: client-side validation + submission feedback.
+         * Keeps the existing POST /api/booking integration untouched.
+         * --------------------------------------------------------------- */
+        var form = document.getElementById("bookingForm");
+        var submitBtn = document.getElementById("submitBtn");
+        var formError = document.getElementById("formError");
+        var formSuccess = document.getElementById("formSuccess");
+        if (!form) return;
 
-    const submitButton = bookingForm.querySelector('button[type="submit"]');
-    submitButton.disabled = true;
-    submitButton.textContent = "Submitting...";
+        var submitBtnDefaultText = submitBtn ? submitBtn.textContent : "Submit Booking";
+        var isSubmitting = false;
 
-    const formData = new FormData(bookingForm);
-    const booking = Object.fromEntries(formData.entries());
+        // Show a message under a specific field and flag it invalid.
+        function setFieldError(inputId, message) {
+          var input = document.getElementById(inputId);
+          if (!input) return;
+          var field = input.closest(".field");
+          var errorEl = document.getElementById(inputId + "-error");
+          if (field) field.classList.add("field--invalid");
+          if (input) input.setAttribute("aria-invalid", "true");
+          if (errorEl) errorEl.textContent = message;
+        }
 
-    try {
-      const response = await fetch("/api/booking", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(booking)
-      });
+        // Clear a single field's error state.
+        function clearFieldError(input) {
+          var field = input.closest(".field");
+          var errorEl = document.getElementById(input.id + "-error");
+          if (field) field.classList.remove("field--invalid");
+          input.removeAttribute("aria-invalid");
+          if (errorEl) errorEl.textContent = "";
+        }
 
-      const result = await response.json();
+        // Clear all validation + banner state.
+        function clearAllErrors() {
+          form.querySelectorAll(".field--invalid").forEach(function (field) {
+            field.classList.remove("field--invalid");
+          });
+          form.querySelectorAll(".field__error").forEach(function (el) {
+            el.textContent = "";
+          });
+          form.querySelectorAll("[aria-invalid]").forEach(function (el) {
+            el.removeAttribute("aria-invalid");
+          });
+          if (formError) {
+            formError.textContent = "";
+            formError.classList.remove("is-visible");
+          }
+        }
 
-      if (!response.ok) {
-        throw new Error(result.error || "Unable to submit booking.");
-      }
+        function isValidEmail(value) {
+          // Simple, permissive RFC-ish check: something@something.tld
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        }
 
-      formSuccess.classList.add("visible");
-      bookingForm.reset();
+        // Returns an array of { id, message }. Empty = valid.
+        function validate(values) {
+          var errors = [];
 
-    } catch (error) {
-      console.error(error);
-      alert(error.message || "Something went wrong. Please try again.");
-    } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = "Submit Booking";
-    }
-  });
-} })();
+          if (!values.fullName) {
+            errors.push({ id: "fullName", message: "Please enter your full name." });
+          }
+
+          if (!values.email) {
+            errors.push({ id: "email", message: "Please enter your email address." });
+          } else if (!isValidEmail(values.email)) {
+            errors.push({ id: "email", message: "Please enter a valid email address, e.g. name@email.com." });
+          }
+
+          if (!values.phone) {
+            errors.push({ id: "phone", message: "Please enter a phone number we can reach you on." });
+          }
+
+          if (!values.trek) {
+            errors.push({ id: "trek", message: "Please select a trek or package." });
+          }
+
+          if (!values.travelDate) {
+            errors.push({ id: "travelDate", message: "Please choose your preferred travel date." });
+          } else {
+            var today = new Date();
+            today.setHours(0, 0, 0, 0);
+            var chosen = new Date(values.travelDate + "T00:00:00");
+            if (isNaN(chosen.getTime())) {
+              errors.push({ id: "travelDate", message: "Please choose a valid date." });
+            } else if (chosen < today) {
+              errors.push({ id: "travelDate", message: "Please choose a date in the future." });
+            }
+          }
+
+          var travelersNum = Number(values.travelers);
+          if (!values.travelers) {
+            errors.push({ id: "travelers", message: "Please enter the number of travelers." });
+          } else if (!Number.isInteger(travelersNum) || travelersNum < 1 || travelersNum > 30) {
+            errors.push({ id: "travelers", message: "Number of travelers must be between 1 and 30." });
+          }
+
+          return errors;
+        }
+
+        // Clear a field's error as soon as the user starts fixing it.
+        form.querySelectorAll("input, select, textarea").forEach(function (el) {
+          var evt = el.tagName === "SELECT" ? "change" : "input";
+          el.addEventListener(evt, function () {
+            if (el.closest(".field").classList.contains("field--invalid")) {
+              clearFieldError(el);
+            }
+          });
+        });
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (isSubmitting) return;
+
+          // Reset any previous success/error UI.
+          clearAllErrors();
+          if (formSuccess) {
+            formSuccess.hidden = true;
+            formSuccess.classList.remove("is-visible");
+            formSuccess.textContent = "";
+          }
+
+          var values = {
+            fullName: form.fullName.value.trim(),
+            email: form.email.value.trim(),
+            phone: form.phone.value.trim(),
+            trek: form.trek.value,
+            travelDate: form.travelDate.value,
+            travelers: form.travelers.value.trim(),
+            message: form.message.value.trim(),
+          };
+
+          var errors = validate(values);
+          if (errors.length) {
+            errors.forEach(function (err) {
+              setFieldError(err.id, err.message);
+            });
+            if (formError) {
+              formError.textContent =
+                "Please fix the highlighted field" +
+                (errors.length > 1 ? "s" : "") +
+                " and try again.";
+              formError.classList.add("is-visible");
+            }
+            // Move focus to the first invalid field for keyboard/AT users.
+            var firstInvalid = document.getElementById(errors[0].id);
+            if (firstInvalid) firstInvalid.focus();
+            return;
+          }
+
+          // Passed validation — submit.
+          isSubmitting = true;
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.setAttribute("aria-busy", "true");
+            submitBtn.textContent = "Submitting...";
+          }
+
+          fetch("/api/booking", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(values),
+          })
+            .then(function (response) {
+              if (!response.ok) {
+                throw new Error("Request failed with status " + response.status);
+              }
+              return response;
+            })
+            .then(function () {
+              // Success: reset form and show confirmation.
+              form.reset();
+              // Restore the date minimum after reset.
+              if (travelDate) {
+                travelDate.min = new Date().toISOString().split("T")[0];
+              }
+              clearAllErrors();
+              if (formSuccess) {
+                formSuccess.innerHTML =
+                  "<span><strong>Booking request sent!</strong><br>" +
+                  "Thanks! We&rsquo;ve received your request and will get back to you within 24 hours.</span>";
+                formSuccess.hidden = false;
+                formSuccess.classList.add("is-visible");
+                // Move focus so screen readers announce it and it's visible.
+                formSuccess.setAttribute("tabindex", "-1");
+                formSuccess.focus({ preventScroll: false });
+              }
+            })
+            .catch(function (err) {
+              // Log technical detail for debugging; keep the UI friendly.
+              console.log("[v0] Booking submission failed:", err);
+              if (formError) {
+                formError.textContent =
+                  "We couldn't send your booking request. Please try again.";
+                formError.classList.add("is-visible");
+                formError.focus && formError.setAttribute("tabindex", "-1");
+                formError.focus && formError.focus();
+              }
+              // Keep the user's data intact (no reset).
+            })
+            .finally(function () {
+              isSubmitting = false;
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.removeAttribute("aria-busy");
+                submitBtn.textContent = submitBtnDefaultText;
+              }
+            });
+        });
+      })();
     </script>
   </body>
 </html>
