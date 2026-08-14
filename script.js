@@ -45,7 +45,7 @@ const packages = [
     desc: "When you visit this stunning part of Nepal, you’ll have the chance to witness incredible landscapes, diverse nature, and authentic culture.",
   },
   {
-    name: "Ramoroshan Trek",
+    name: "Ramaroshan Trek",
     region: "Farwest Nepal",
     image: "images/packages/ramaroshan.webp",
     days: 6,
@@ -321,21 +321,81 @@ function observeReveals() {
 }
 
 /* ---- Form submission ----------------------------------------------------- */
+/* ---- Form submission ----------------------------------------------------- */
 function initForm() {
   const form = document.getElementById("bookingForm");
   const success = document.getElementById("formSuccess");
-  form.addEventListener("submit", (e) => {
+
+  if (!form) return;
+
+  // Create an error message if one doesn't already exist
+  let error = document.getElementById("formError");
+
+  if (!error) {
+    error = document.createElement("div");
+    error.id = "formError";
+    error.className = "form__error";
+    error.hidden = true;
+    error.textContent =
+      "Something went wrong while sending your message. Please try again.";
+
+    form.appendChild(error);
+  }
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    success.classList.remove("show");
+    error.hidden = true;
+
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
-    success.classList.add("show");
-    form.reset();
-    setTimeout(() => success.classList.remove("show"), 6000);
+
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    submitButton.disabled = true;
+    submitButton.setAttribute("aria-busy", "true");
+    submitButton.textContent = "Sending...";
+
+    try {
+      const formData = new FormData(form);
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Request failed");
+      }
+
+      // Success
+      form.reset();
+      success.classList.add("show");
+
+      // Hide success message after 6 seconds
+      setTimeout(() => {
+        success.classList.remove("show");
+      }, 6000);
+
+    } catch (err) {
+      console.error("Contact form error:", err);
+      error.hidden = false;
+
+    } finally {
+      submitButton.disabled = false;
+      submitButton.removeAttribute("aria-busy");
+      submitButton.textContent = "Request Booking";
+    }
   });
 }
-
 /* ---- Init ---------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderPackages();

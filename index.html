@@ -31,7 +31,7 @@
           <a class="nav__link" href="#packages">Packages</a>
           <a class="nav__link" href="#testimonials">Reviews</a>
           <a class="nav__link" href="#contact">Contact</a>
-          <a class="btn btn--primary" href="#contact">Book Now</a>
+          <a class="btn btn--primary" href="booking.html">Book Now</a>
         </nav>
 
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
@@ -163,7 +163,7 @@ Our team consists of experienced local guides, mountain trekkers, and field expe
         <div class="container contact__grid">
           <div class="reveal">
             <span class="eyebrow">Get in Touch</span>
-            <h2 class="section__title">Book your adventure</h2>
+            <h2 class="section__title">Contact for your next adventure</h2>
             <p class="section__subtitle">
               Fill out the form and our expedition planners will reach out
               within 24 hours.
@@ -184,7 +184,7 @@ Our team consists of experienced local guides, mountain trekkers, and field expe
             </ul>
           </div>
 
-          <form class="form reveal" id="bookingForm" novalidate>
+          <form class="form reveal" id="contactForm" novalidate>
             <div class="form__row">
               <div class="field">
                 <label for="name">Full name</label>
@@ -207,7 +207,13 @@ Our team consists of experienced local guides, mountain trekkers, and field expe
             </div>
             <button type="submit" class="btn btn--primary">Request Booking</button>
             <p class="form__note">No payment required to enquire. We'll confirm availability first.</p>
-            <div class="form__success" id="formSuccess">Thanks! Your request is on its way! we'll be in touch within 24 hours.</div>
+            <div class="form__success" id="formSuccess" hidden>
+  Thanks! Your request is on its way! We'll be in touch within 24 hours.
+</div>
+
+<div class="form__error" id="formError" hidden>
+  Something went wrong while sending your message. Please try again.
+</div>
           </form>
         </div>
       </section>
