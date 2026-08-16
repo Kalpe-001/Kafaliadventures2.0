@@ -333,7 +333,7 @@
             <ul class="booking-contact">
               <li>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                +977 98XXXXXXXX
+                +977 9743518422
               </li>
               <li>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
@@ -372,29 +372,36 @@
                 <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+977 98XXXXXXXX" required aria-describedby="phone-error" />
                 <p class="field__error" id="phone-error"></p>
               </div>
+              
               <div class="field">
                 <label for="trek">Trek / package <span class="required">*</span></label>
                 <select id="trek" name="trek" required aria-describedby="trek-error">
                   <option value="" disabled selected>Select a package</option>
                   <optgroup label="Trekking">
-                    <option value="saipal">Saipal Base Camp Trek</option>
                     <option value="api">Api Base Camp Trek</option>
                     <option value="khaptad">Khaptad National Park Trek</option>
                     <option value="rara">Rara Lake Trek</option>
                     <option value="phoksundo">Shey Phoksundo Trek</option>
-                    <option value="mustang">Upper Mustang Trek</option>
                     <option value="ramaroshan">Ramaroshan Trek</option>
+                    <option value="mustang">Upper Mustang Tour</option>
                   </optgroup>
                   <optgroup label="Adventures &amp; Activities">
-                    <option value="hiking">Hiking &amp; Safari</option>
-                    <option value="biking">Mountain Biking</option>
+                    <option value="hiking"> Hiking</option>
+                    <option value="cycling">Cycling</option>
                     <option value="rafting">River Rafting</option>
                     <option value="angling">Angling</option>
                     <option value="junglewalk">Jungle Walk</option>
+                    <option value="safari">Shuklaphanta Safari</option>
                   </optgroup>
-                  <option value="other">Other / Not sure yet</option>
                 </select>
                 <p class="field__error" id="trek-error"></p>
+              </div>
+              <div class="field">
+                <label for="country">Country <span class="required">*</span></label>
+                <select name="country" id="country">
+                  <option value="">Select your country</option>
+                </select>
+                <p class="field__error" id="country-error"></p>
               </div>
             </div>
 
@@ -406,19 +413,31 @@
               </div>
               <div class="field">
                 <label for="travelers">Number of travelers <span class="required">*</span></label>
-                <input type="number" id="travelers" name="travelers" min="1" max="30" step="1" value="1" required aria-describedby="travelers-error" />
+                <input type="number" id="travelers" name="travelers" min="1" max="18" step="1" value="1" required aria-describedby="travelers-error" />
                 <p class="field__error" id="travelers-error"></p>
               </div>
             </div>
+<div class="field">
+  <label for="healthIssues">Health Issues / Medical Information</label>
+  <textarea
+    id="healthIssues"
+    name="healthIssues"
+    placeholder="Any allergies, altitude sickness history, medical conditions, or medications we should be aware of?"
+  ></textarea>
+</div>
 
-            <div class="field">
-              <label for="message">Message / special requests</label>
-              <textarea id="message" name="message" placeholder="Experience level, dietary needs, accessibility, budget, or anything else we should know..."></textarea>
-            </div>
-
+<div class="field">
+  <label for="message">Message / Special Requests</label>
+  <textarea
+    id="message"
+    name="message"
+    placeholder="Any additional requests, preferences, questions, or information you'd like to share..."
+  ></textarea>
+</div>
             <button type="submit" class="btn btn--primary" id="submitBtn">Submit Booking</button>
             <p class="form__note">
-              No payment required to enquire. We'll confirm availability first.
+              No payment is required to submit an inquiry, however a 30% advance payment is required once your booking is confirmed and is non-refundable in case of cancellation.
+              Please visit our Payment Policy for details.
             </p>
             <p class="form__error" id="formError" role="alert"></p>
             <div class="form__success" id="formSuccess" role="status" aria-live="polite" hidden></div>
@@ -490,6 +509,210 @@
       // Lightweight page interactions only. No backend / no form submission logic —
       // wire #bookingForm up to your own JavaScript backend later.
       (function () {
+        const countries = [
+  "Afghanistan",
+  "Albania",
+  "Algeria",
+  "Andorra",
+  "Angola",
+  "Antigua and Barbuda",
+  "Argentina",
+  "Armenia",
+  "Australia",
+  "Austria",
+  "Azerbaijan",
+  "Bahamas",
+  "Bahrain",
+  "Bangladesh",
+  "Barbados",
+  "Belarus",
+  "Belgium",
+  "Belize",
+  "Benin",
+  "Bhutan",
+  "Bolivia",
+  "Bosnia and Herzegovina",
+  "Botswana",
+  "Brazil",
+  "Brunei",
+  "Bulgaria",
+  "Burkina Faso",
+  "Burundi",
+  "Cabo Verde",
+  "Cambodia",
+  "Cameroon",
+  "Canada",
+  "Central African Republic",
+  "Chad",
+  "Chile",
+  "China",
+  "Colombia",
+  "Comoros",
+  "Congo",
+  "Costa Rica",
+  "Côte d'Ivoire",
+  "Croatia",
+  "Cuba",
+  "Cyprus",
+  "Czechia",
+  "Democratic Republic of the Congo",
+  "Denmark",
+  "Djibouti",
+  "Dominica",
+  "Dominican Republic",
+  "Ecuador",
+  "Egypt",
+  "El Salvador",
+  "Equatorial Guinea",
+  "Eritrea",
+  "Estonia",
+  "Eswatini",
+  "Ethiopia",
+  "Fiji",
+  "Finland",
+  "France",
+  "Gabon",
+  "Gambia",
+  "Georgia",
+  "Germany",
+  "Ghana",
+  "Greece",
+  "Grenada",
+  "Guatemala",
+  "Guinea",
+  "Guinea-Bissau",
+  "Guyana",
+  "Haiti",
+  "Honduras",
+  "Hungary",
+  "Iceland",
+  "India",
+  "Indonesia",
+  "Iran",
+  "Iraq",
+  "Ireland",
+  "Israel",
+  "Italy",
+  "Jamaica",
+  "Japan",
+  "Jordan",
+  "Kazakhstan",
+  "Kenya",
+  "Kiribati",
+  "Kuwait",
+  "Kyrgyzstan",
+  "Laos",
+  "Latvia",
+  "Lebanon",
+  "Lesotho",
+  "Liberia",
+  "Libya",
+  "Liechtenstein",
+  "Lithuania",
+  "Luxembourg",
+  "Madagascar",
+  "Malawi",
+  "Malaysia",
+  "Maldives",
+  "Mali",
+  "Malta",
+  "Marshall Islands",
+  "Mauritania",
+  "Mauritius",
+  "Mexico",
+  "Micronesia",
+  "Moldova",
+  "Monaco",
+  "Mongolia",
+  "Montenegro",
+  "Morocco",
+  "Mozambique",
+  "Myanmar",
+  "Namibia",
+  "Nauru",
+  "Nepal",
+  "Netherlands",
+  "New Zealand",
+  "Nicaragua",
+  "Niger",
+  "Nigeria",
+  "North Korea",
+  "North Macedonia",
+  "Norway",
+  "Oman",
+  "Pakistan",
+  "Palau",
+  "Palestine",
+  "Panama",
+  "Papua New Guinea",
+  "Paraguay",
+  "Peru",
+  "Philippines",
+  "Poland",
+  "Portugal",
+  "Qatar",
+  "Romania",
+  "Russia",
+  "Rwanda",
+  "Saint Kitts and Nevis",
+  "Saint Lucia",
+  "Saint Vincent and the Grenadines",
+  "Samoa",
+  "San Marino",
+  "São Tomé and Príncipe",
+  "Saudi Arabia",
+  "Senegal",
+  "Serbia",
+  "Seychelles",
+  "Sierra Leone",
+  "Singapore",
+  "Slovakia",
+  "Slovenia",
+  "Solomon Islands",
+  "Somalia",
+  "South Africa",
+  "South Korea",
+  "South Sudan",
+  "Spain",
+  "Sri Lanka",
+  "Sudan",
+  "Suriname",
+  "Sweden",
+  "Switzerland",
+  "Syria",
+  "Tajikistan",
+  "Tanzania",
+  "Thailand",
+  "Timor-Leste",
+  "Togo",
+  "Tonga",
+  "Trinidad and Tobago",
+  "Tunisia",
+  "Türkiye",
+  "Turkmenistan",
+  "Tuvalu",
+  "Uganda",
+  "Ukraine",
+  "United Arab Emirates",
+  "United Kingdom",
+  "United States",
+  "Uruguay",
+  "Uzbekistan",
+  "Vanuatu",
+  "Vatican City",
+  "Venezuela",
+  "Vietnam",
+  "Yemen",
+  "Zambia",
+  "Zimbabwe"
+];
+        const countrySelect = document.getElementById("country");
+            countries.forEach(country => {
+            const option = document.createElement("option");
+            option.value = country;
+            option.textContent = country;
+            countrySelect.appendChild(option);
+        })
         // Footer year
         var yearEl = document.getElementById("year");
         if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -517,7 +740,12 @@
         if (travelDate) {
           travelDate.min = new Date().toISOString().split("T")[0];
         }
-
+        if (!values.country) {
+          errors.push({
+            id: "country",
+            message: "Please select your country."
+          });
+        }
         // Safety net: this standalone page doesn't load the main site's
         // IntersectionObserver, so make sure any ".reveal" elements are shown.
         document.querySelectorAll(".reveal").forEach(function (el) {
@@ -617,8 +845,8 @@
           var travelersNum = Number(values.travelers);
           if (!values.travelers) {
             errors.push({ id: "travelers", message: "Please enter the number of travelers." });
-          } else if (!Number.isInteger(travelersNum) || travelersNum < 1 || travelersNum > 30) {
-            errors.push({ id: "travelers", message: "Number of travelers must be between 1 and 30." });
+          } else if (!Number.isInteger(travelersNum) || travelersNum < 1 || travelersNum > 18) {
+            errors.push({ id: "travelers", message: "Number of travelers must be between 1 and 18." });
           }
 
           return errors;
@@ -648,11 +876,13 @@
 
           var values = {
             fullName: form.fullName.value.trim(),
+            country:form.country.value,
             email: form.email.value.trim(),
             phone: form.phone.value.trim(),
             trek: form.trek.value,
             travelDate: form.travelDate.value,
             travelers: form.travelers.value.trim(),
+            healthIssues:form.healthIssues.value.trim(),
             message: form.message.value.trim(),
           };
 
