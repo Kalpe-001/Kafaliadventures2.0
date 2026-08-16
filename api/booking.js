@@ -28,17 +28,20 @@ export default async function handler(req, res) {
   try {
     const {
       fullName,
+      country,
       email,
       phone,
       trek,
       travelDate,
       travelers,
+      healthIssues,
       message
     } = req.body || {};
 
     // Basic validation
     if (
       !fullName ||
+      !country ||
       !email ||
       !phone ||
       !trek ||
@@ -56,11 +59,13 @@ export default async function handler(req, res) {
       .insert([
         {
           full_name: fullName,
+          country: country,
           email: email,
           phone: phone,
           trek: trek,
           travel_date: travelDate,
           travelers: Number(travelers),
+          health_issues: healthIssues || null,
           message: message || null
         }
       ])
@@ -80,11 +85,17 @@ export default async function handler(req, res) {
 
     // Escape user-provided values before putting them into HTML
     const safeName = escapeHtml(fullName);
+    const safeCountry = escapeHtml(country);
     const safeEmail = escapeHtml(email);
     const safePhone = escapeHtml(phone);
     const safeTrek = escapeHtml(trek);
     const safeTravelDate = escapeHtml(travelDate);
     const safeTravelers = escapeHtml(travelers);
+
+    const safeHealthIssues = escapeHtml(
+      healthIssues || "No health issues reported."
+    ).replace(/\n/g, "<br>");
+
     const safeMessage = escapeHtml(
       message || "No additional message provided."
     ).replace(/\n/g, "<br>");
@@ -111,14 +122,19 @@ export default async function handler(req, res) {
           <h3>Customer</h3>
 
           <p><strong>Name:</strong> ${safeName}</p>
+          <p><strong>Country:</strong> ${safeCountry}</p>
           <p><strong>Email:</strong> ${safeEmail}</p>
-          <p><strong>Phone:</strong> ${safePhone}</p>
+          <p><strong>Phone / WhatsApp:</strong> ${safePhone}</p>
 
           <h3>Trip Details</h3>
 
           <p><strong>Trek / Package:</strong> ${safeTrek}</p>
           <p><strong>Travel Date:</strong> ${safeTravelDate}</p>
           <p><strong>Travelers:</strong> ${safeTravelers}</p>
+
+          <h3>Health Issues / Medical Information</h3>
+
+          <p>${safeHealthIssues}</p>
 
           <h3>Message / Special Requests</h3>
 
