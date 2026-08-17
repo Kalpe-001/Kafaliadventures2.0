@@ -33,7 +33,9 @@ export default async function handler(req, res) {
       trek,
       travelDate,
       travelers,
-      message
+      country,
+      healthIssues,
+      message,
     } = req.body || {};
 
     // Basic validation
@@ -41,6 +43,7 @@ export default async function handler(req, res) {
       !fullName ||
       !email ||
       !phone ||
+      !country ||
       !trek ||
       !travelDate ||
       !travelers
@@ -58,9 +61,11 @@ export default async function handler(req, res) {
           full_name: fullName,
           email: email,
           phone: phone,
+          country:country,
           trek: trek,
           travel_date: travelDate,
           travelers: Number(travelers),
+          healthIssues: healthIssues || null,
           message: message || null
         }
       ])
@@ -82,6 +87,8 @@ export default async function handler(req, res) {
     const safeName = escapeHtml(fullName);
     const safeEmail = escapeHtml(email);
     const safePhone = escapeHtml(phone);
+    const safeCountry= escapeHtml(country);
+    const safeHealthIssues= escapeHtml(healthIssues || "No health issues provided").replace(/\n/g, "<br>");
     const safeTrek = escapeHtml(trek);
     const safeTravelDate = escapeHtml(travelDate);
     const safeTravelers = escapeHtml(travelers);
@@ -113,7 +120,8 @@ export default async function handler(req, res) {
           <p><strong>Name:</strong> ${safeName}</p>
           <p><strong>Email:</strong> ${safeEmail}</p>
           <p><strong>Phone:</strong> ${safePhone}</p>
-
+          <p><strong>Country:</strong> ${safeCountry}</p>
+          
           <h3>Trip Details</h3>
 
           <p><strong>Trek / Package:</strong> ${safeTrek}</p>
@@ -121,8 +129,9 @@ export default async function handler(req, res) {
           <p><strong>Travelers:</strong> ${safeTravelers}</p>
 
           <h3>Message / Special Requests</h3>
-
           <p>${safeMessage}</p>
+          <h3>Health Issues / Medical Information</h3>
+          <p>${safeHealthIssues}</p>
 
           <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 24px 0;" />
 
