@@ -61,12 +61,13 @@ export default async function handler(req, res) {
           full_name: fullName,
           email: email,
           phone: phone,
-          country:country,
           trek: trek,
           travel_date: travelDate,
           travelers: Number(travelers),
-          healthIssues: healthIssues || null,
-          message: message || null
+          message: message || null,
+          country:country,
+          health_issues: healthIssues || null
+
         }
       ])
       .select()
