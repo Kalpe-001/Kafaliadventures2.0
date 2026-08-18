@@ -184,7 +184,7 @@ Our team consists of experienced local guides, mountain trekkers, and field expe
             </ul>
           </div>
 
-          <form class="form reveal" id="contactForm" >
+          <form class="form reveal contact-page" id="contactForm" novalidate>
             <div class="form__row">
               <div class="field">
                 <label for="name">Full name</label>
@@ -196,23 +196,46 @@ Our team consists of experienced local guides, mountain trekkers, and field expe
               </div>
             </div>
             <div class="field">
-              <label for="trek">Which trek?</label>
+              <label for="trek">Where do you want to go?</label>
               <select id="trek" name="trek" required>
-                <option value="" disabled selected>Select a package</option>
+                <option value="" disabled selected>Choose an adventure</option>
+                            <optgroup label="Trekking">
+                              <option value="api">Api Base Camp Trek</option>
+                              <option value="khaptad">Khaptad National Park Trek</option>
+                              <option value="rara">Rara Lake Trek</option>
+                              <option value="phoksundo">Shey Phoksundo Trek</option>
+                              <option value="ramaroshan">Ramaroshan Trek</option>
+                              <option value="mustang">Upper Mustang Tour</option>
+                            </optgroup>
+                            <optgroup label="Adventures &amp; Activities">
+                              <option value="hiking"> Hiking</option>
+                              <option value="cycling">Cycling</option>
+                              <option value="rafting">River Rafting</option>
+                              <option value="angling">Angling</option>
+                              <option value="junglewalk">Jungle Walk</option>
+                              <option value="safari">Shuklaphanta Safari</option>
+                            </optgroup>
               </select>
             </div>
             <div class="field">
-              <label for="message">Tell us about your trip</label>
-              <textarea id="message" name="message" placeholder="Group size, dates, experience level..."></textarea>
+              <label for="message">Tell us about your plan</label>
+              <textarea 
+              id="message" 
+              name="message" 
+              placeholder="Any Questions or confusion you have regarding your destination">
+            </textarea>
             </div>
-            <button type="submit" class="btn btn--primary">Request Booking</button>
-            <p class="form__note">No payment required to enquire. We'll confirm availability first.</p>
-            <div class="form__status form__status--success" id="contactSuccess" hidden>
-              Thanks! Your request is on its way! We'll be in touch within 24 hours.
-            </div>
-            <div class="form__status form__status--error" id="contactError" hidden>
-              Something went wrong while sending your message. Please try again.
-            </div>
+            <button type="submit" class="btn btn--primary">Send message</button>
+            <p class="form__note">
+              No payment required to enquire. We'll confirm availability first.
+            </p>
+          <div class="form__status form__status--success" id="contactSuccess" hidden>
+            Thanks! Your request is on its way! We'll be in touch within 24 hours.
+          </div>
+
+          <div class="form__status form__status--error" id="contactError" hidden>
+            Something went wrong while sending your message. Please try again.
+          </div>
           </form>
         </div>
       </section>
@@ -271,7 +294,44 @@ Our team consists of experienced local guides, mountain trekkers, and field expe
         </div>
       </div>
     </footer>
-    <script src="script.js">
+    <script src="script.js"></script>
+        <script>
+        document.querySelectorAll(".contact-page-faq details").forEach((detail) => {
+  detail.addEventListener("toggle", () => {
+    if (detail.open) {
+      document.querySelectorAll(".contact-page-faq details").forEach((other) => {
+        if (other !== detail) {
+          other.removeAttribute("open");
+        }
+      });
+    }
+  });
+});
+      (function () {
+        var form = document.getElementById("contactForm");
+        var submit = document.getElementById("contactSubmit");
+        var success = document.getElementById("contactSuccess");
+        var error = document.getElementById("contactError");
+        var navToggle = document.getElementById("navToggle");
+        var nav = document.getElementById("nav");
+        var header = document.getElementById("header");
+        document.getElementById("year").textContent = new Date().getFullYear();
+        navToggle.addEventListener("click", function () { var open = nav.classList.toggle("open"); navToggle.setAttribute("aria-expanded", String(open)); });
+        nav.querySelectorAll("a").forEach(function (link) { link.addEventListener("click", function () { nav.classList.remove("open"); navToggle.setAttribute("aria-expanded", "false"); }); });
+        window.addEventListener("scroll", function () { header.classList.toggle("scrolled", window.scrollY > 10); }, { passive: true });
+        form.querySelectorAll("input, select, textarea").forEach(function (field) { field.addEventListener("input", function () { field.closest(".field").classList.remove("field--invalid"); }); });
+        form.addEventListener("submit", async function (event) {
+          event.preventDefault(); success.hidden = true; error.hidden = true;
+          if (!form.checkValidity()) { form.reportValidity(); return; }
+          submit.disabled = true; submit.setAttribute("aria-busy", "true"); submit.textContent = "Sending...";
+          try {
+            var response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
+            if (!response.ok) throw new Error("Request failed");
+            form.reset(); success.hidden = false;
+          } catch (requestError) { error.hidden = false; }
+          finally { submit.disabled = false; submit.removeAttribute("aria-busy"); submit.textContent = "Send message"; }
+        });
+      }());
     </script>
   </body>
 </html>
