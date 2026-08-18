@@ -97,12 +97,11 @@ export default async function handler(req, res) {
           <p><strong>Name:</strong> ${safeName}</p>
           <p><strong>Email:</strong> ${safeEmail}</p>
 
-          <h3>Adventure</h3>
+          <h3>Trip Details</h3>
 
-          <p><strong>Interested In:</strong> ${safeTrek}</p>
+          <p><strong>Trek / Package</strong> ${safeTrek}</p>
 
-          <h3>Message</h3>
-
+          <h3>Message / Question</h3>
           <p>${safeMessage}</p>
 
           <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 24px 0;" />
