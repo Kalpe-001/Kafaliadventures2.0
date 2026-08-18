@@ -442,3 +442,28 @@ document.addEventListener("DOMContentLoaded", () => {
   observeReveals();
   document.getElementById("year").textContent = new Date().getFullYear();
 });
+      (function () {
+        var form = document.getElementById("contactForm");
+        var submit = document.getElementById("contactSubmit");
+        var success = document.getElementById("contactSuccess");
+        var error = document.getElementById("contactError");
+        var navToggle = document.getElementById("navToggle");
+        var nav = document.getElementById("nav");
+        var header = document.getElementById("header");
+        document.getElementById("year").textContent = new Date().getFullYear();
+        navToggle.addEventListener("click", function () { var open = nav.classList.toggle("open"); navToggle.setAttribute("aria-expanded", String(open)); });
+        nav.querySelectorAll("a").forEach(function (link) { link.addEventListener("click", function () { nav.classList.remove("open"); navToggle.setAttribute("aria-expanded", "false"); }); });
+        window.addEventListener("scroll", function () { header.classList.toggle("scrolled", window.scrollY > 10); }, { passive: true });
+        form.querySelectorAll("input, select, textarea").forEach(function (field) { field.addEventListener("input", function () { field.closest(".field").classList.remove("field--invalid"); }); });
+        form.addEventListener("submit", async function (event) {
+          event.preventDefault(); success.hidden = true; error.hidden = true;
+          if (!form.checkValidity()) { form.reportValidity(); return; }
+          submit.disabled = true; submit.setAttribute("aria-busy", "true"); submit.textContent = "Sending...";
+          try {
+            var response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
+            if (!response.ok) throw new Error("Request failed");
+            form.reset(); success.hidden = false;
+          } catch (requestError) { error.hidden = false; }
+          finally { submit.disabled = false; submit.removeAttribute("aria-busy"); submit.textContent = "Send message"; }
+        });
+      }());
