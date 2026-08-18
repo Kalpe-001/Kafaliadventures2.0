@@ -2,7 +2,7 @@
    Altura Expeditions — landing page interactions
    ========================================================================== */
 
-/* ---- Data: 14 trekking packages ----------------------------------------- */
+/* ---- Data: 11 for now trekking packages ----------------------------------------- */
 const packages = [
   {
     name: "Api Base Camp",
@@ -11,7 +11,7 @@ const packages = [
     image: "images/packages/api.jpg",
     days: 10,
     difficulty: "Challenging",
-    price: "Price on Req",
+    price: "On Request",
     page:"api.html",
     desc: "Take a dive and dip into the untouched nature and authentic culture. Api Nampa with no crowd, no commercialization withstands in its purest form silently.",
   },
@@ -22,7 +22,7 @@ const packages = [
     image: "images/packages/shey-phoksundo.jpeg",
     days: 9,
     difficulty: "Challenging",
-    price: "Price on Req",
+    price: "On Request",
     page:"phoksundo.html",
     desc: "Just sitting by the little village of Ringmo and watching the Phoksundo Lake change color throughout the day is enough to put a spell on you",
   },
@@ -33,8 +33,8 @@ const packages = [
     image: "images/packages/khaptad.jpg",
     days: 7,
     page:"khaptad.html",
-    difficulty: "Moderate",
-    price: "Price on Req",
+    difficulty: "Easy",
+    price: "On Request",
     desc: "The Khaptad National Park, one of the main attractions of Khaptad, was established in 1984 in the far western region of Nepal. It is covered by beautiful oak and rhododendron forests.",
   },
   {
@@ -45,7 +45,7 @@ const packages = [
     days: 6,
     page:"rara.html",
     difficulty: "Challenging",
-    price: "Price on Req",
+    price: "On Request",
     desc: "When you visit this stunning part of Nepal, you’ll have the chance to witness incredible landscapes, diverse nature, and authentic culture.",
   },
   {
@@ -55,7 +55,7 @@ const packages = [
     image: "images/packages/ramaroshan.webp",
     days: 6,
     difficulty: "Moderate",
-    price: "Price on Req",
+    price: "On Request",
     page:"ramaroshan.html",
     desc: "The Ramaroshan Trek is a pristine, off-the-beaten-path journey famed for its 12 crystal-clear lakes and 18 rolling green pastures (patans), waterfall, deep forest with diverse vegetation",
   },
@@ -66,7 +66,7 @@ const packages = [
     image: "images/packages/saipal.jpg",
     days: 12,
     difficulty: "Moderate",
-    price: "Price on Req",
+    price: "On Request",
     desc: "COMING SOON",
   },
   */
@@ -77,10 +77,11 @@ const packages = [
     image: "images/packages/mustang.jpg",
     days: 6,
     difficulty: "Moderate",
-    price: "Price on Req",
+    price: "On Request",
     page:"mustang.html",
     desc: "Known for its remarkable blend of rugged Himalayan landscapes, ancient Tibetan-influenced culture, historic villages, and unforgettable trails far beyond Nepal's busy trekking routes.",
   },
+  /*
   {
     name: "Shuklaphanta Safari",
     link_name:"safari",
@@ -88,10 +89,10 @@ const packages = [
     image: "images/packages/shuklaphanta.jpg",
     days: "3",
     difficulty: "Easy",
-    price: "Price on Req",
+    price: "On Request",
     desc:"COMING SOON"
-    /*desc: "Shuklaphanta National Park is famous for housing the world's largest herd of swamp deer (barasingha),Royal Bengal tigers",
-  */},
+  desc: "Shuklaphanta National Park is famous for housing the world's largest herd of swamp deer (barasingha),Royal Bengal tigers",},*/
+    
   {
     name: "Jungle Walk",
     link_name:"junglewalk",
@@ -99,7 +100,7 @@ const packages = [
     image: "images/packages/junglewalk.jpg",
     days:"3",
     difficulty: "Easy",
-    price: "Price on Req",
+    price: "On Request",
     page:"junglewalk.html",
     desc: "Explore Shuklaphanta's vast grasslands and forests on foot, discovering rare wildlife, peaceful wetlands, and the untamed natural beauty of Nepal's Far West.",
   },
@@ -118,8 +119,8 @@ const packages = [
     link_name:"hiking",
     region: "Farwest Nepal",
     image: "images/packages/shivalik.jpg",
-    difficulty: "Challenging",
-    price: "Price on Req",
+    difficulty: "Easy",
+    price: "On Request",
     page:"hiking.html",
     desc: "Explore the Shivalik Hills of Nepal's Chure Range, where forested ridges, river valleys, and diverse wildlife create an authentic journey through the country's southern landscapes.",  },
   {
@@ -130,7 +131,7 @@ const packages = [
     days: "Custom",
     page:"angling.html",
     difficulty: "Moderate",
-    price: "Price on Req",
+    price: "On Request",
     desc: "Enjoy a peaceful angling experience along the Mahakali River, surrounded by scenic forests, flowing waters, and tranquil landscapes.",
     },
   {
@@ -140,7 +141,7 @@ const packages = [
     image: "images/packages/cycling.jpg",
     days: 6,
     difficulty: "Moderate",
-    price: "Price on Req",
+    price: "On Request",
     page:"biking.html",
     desc: "Cycle through the scenic Chure foothills, winding past forests, villages, and rolling landscapes while enjoying fresh air, peaceful surroundings, and an unforgettable countryside adventure filled with nature and exploration.",
     },
@@ -204,7 +205,7 @@ function renderPackages() {
         <p class="card__desc">${p.desc}</p>
         <div class="card__footer">
           <div class="card__price">
-            <small>from</small>
+            <small>PRICE</small>
             <strong>${p.price.toLocaleString()}</strong>
           </div>
           <div class="card__actions">
