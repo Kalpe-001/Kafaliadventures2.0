@@ -6,6 +6,7 @@
 const packages = [
   {
     name: "Api Base Camp",
+    link_name:"api",
     region: "Farwest Nepal",
     image: "images/packages/api.jpg",
     days: 10,
@@ -16,6 +17,7 @@ const packages = [
   },
   {
     name: "Shey Phoksundo Lake",
+    link_name:"phoksundo",
     region: "Farwest Nepal",
     image: "images/packages/shey-phoksundo.jpeg",
     days: 9,
@@ -26,6 +28,7 @@ const packages = [
   },
   {
     name: "Khaptad National Park",
+    link_name:"khaptad",
     region: "Farwest Nepal",
     image: "images/packages/khaptad.jpg",
     days: 7,
@@ -36,6 +39,7 @@ const packages = [
   },
   {
     name: "Rara National Park",
+    link_name:"rara",
     region: "Midwest Nepal",
     image: "images/packages/rara.jpg",
     days: 6,
@@ -46,6 +50,7 @@ const packages = [
   },
   {
     name: "Ramaroshan Trek",
+    link_name:"ramaroshan",
     region: "Farwest Nepal",
     image: "images/packages/ramaroshan.webp",
     days: 6,
@@ -67,6 +72,7 @@ const packages = [
   */
   {
     name: "Mustang Tour",
+    link_name:"mustang",
     region: "Central Nepal",
     image: "images/packages/mustang.jpg",
     days: 6,
@@ -77,6 +83,7 @@ const packages = [
   },
   {
     name: "Shuklaphanta Safari",
+    link_name:"safari",
     region: "Farwest Nepal",
     image: "images/packages/shuklaphanta.jpg",
     days: "3",
@@ -87,6 +94,7 @@ const packages = [
   */},
   {
     name: "Jungle Walk",
+    link_name:"junglewalk",
     region: "Farwest Nepal",
     image: "images/packages/junglewalk.jpg",
     days:"3",
@@ -97,6 +105,7 @@ const packages = [
   },
   {
     name: "River Rafting",
+    link_name:"rafting",
     region: "Farwest Nepal",
     image: "images/packages/rafting.png",
     days: "half-day/full-day or 5",
@@ -106,6 +115,7 @@ const packages = [
     desc: "Ride the currents of the Mahakali River through rugged valleys and remote landscapes, experiencing an unforgettable adventure.",  },
   {
     name: "Hiking",
+    link_name:"hiking",
     region: "Farwest Nepal",
     image: "images/packages/shivalik.jpg",
     difficulty: "Challenging",
@@ -114,6 +124,7 @@ const packages = [
     desc: "Explore the Shivalik Hills of Nepal's Chure Range, where forested ridges, river valleys, and diverse wildlife create an authentic journey through the country's southern landscapes.",  },
   {
     name: "Angling",
+    link_name:"angling",
     region: "Farwest Nepal",
     image: "images/packages/angling.webp",
     days: "Custom",
@@ -124,6 +135,7 @@ const packages = [
     },
   {
     name: "Biking",
+    link_name:"biking",
     region: "Farwest Nepal",
     image: "images/packages/cycling.jpg",
     days: 6,
@@ -201,7 +213,7 @@ function renderPackages() {
                 ? `<a class="card__more" href="${p.page}">View More</a>`
                 : ""
             }
-            <a class="card__link" href="#contact" data-trek="${p.name}">Book ${icons.arrow}</a>
+            <a class="card__link" href="booking.html?trek=${p.link_name}" data-trek="${p.name}">Book ${icons.arrow}</a>
           </div>
         </div>
       </div>
