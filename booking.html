@@ -399,7 +399,7 @@
                 <select id="trek" name="trek" required aria-describedby="trek-error">
                   <option value="" disabled selected>Select a package</option>
                   <optgroup label="Trekking">
-                    <option value="saipal">Saipal Base Camp Trek</option>
+                    <!--<option value="saipal">Saipal Base Camp Trek</option>-->
                     <option value="api">Api Base Camp Trek</option>
                     <option value="khaptad">Khaptad National Park Trek</option>
                     <option value="rara">Rara Lake Trek</option>
@@ -522,7 +522,16 @@
     <script>
       // Lightweight page interactions only. No backend / no form submission logic —
       // wire #bookingForm up to your own JavaScript backend later.
+
       (function () {
+       document.addEventListener("DOMContentLoaded", () => {
+       const params = new URLSearchParams(window.location.search);
+       const trek = params.get("trek");
+       const trekSelect = document.getElementById("trek");
+       if (trek && trekSelect) {
+      trekSelect.value = trek;
+    }
+  });
         // Footer year
         const countries = [
         "Afghanistan",
