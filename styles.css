@@ -797,6 +797,60 @@ h4 {
   color: var(--navy-500);
   flex-shrink: 0;
 }
+/*contact form */
+      .contact-page-form .form__intro 
+      { 
+        margin-bottom: 1.5rem; 
+        color: var(--muted); 
+        font-size: .95rem; 
+      }
+      .contact-page-form .required
+       { 
+        color: #b23b3b;
+       }
+      .contact-page-form .field__error 
+      { 
+        display: none; 
+        margin-top: .4rem; 
+        color: #8f2f2f; 
+        font-size: .85rem;
+       }
+      .contact-page-form .field--invalid .field__error 
+      { 
+        display: block; 
+      }
+      .contact-page-form .field--invalid input, .contact-page-form .field--invalid select, .contact-page-form .field--invalid textarea 
+      {
+         border-color: #b23b3b; 
+         box-shadow: 0 0 0 2px rgba(178,59,59,.15); 
+        }
+      .contact-page-form .form__status 
+      { 
+        margin-top: 1rem;
+         padding: .85rem 1rem; 
+         border-radius: 10px; 
+         font-size: .92rem; 
+        }
+      .contact-page-form .form__status[hidden] 
+      { 
+        display: none; 
+      }
+      .contact-page-form .form__status--success 
+      {
+         background: rgba(19,64,116,.1); 
+         color: var(--navy-700);
+         }
+      .contact-page-form .form__status--error 
+      { 
+        background: rgba(178,59,59,.08); 
+        border: 1px solid rgba(178,59,59,.35); 
+        color: #8f2f2f; 
+      }
+      .contact-page-form .btn[aria-busy="true"]
+       { 
+        opacity: .7;
+         cursor: progress; 
+        }
 /* FAQ -------------------------------------------------------------------- */
 
 .contact-page-faq details {
