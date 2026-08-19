@@ -120,6 +120,7 @@ const packages = [
     region: "Farwest Nepal",
     image: "images/packages/shivalik.jpg",
     difficulty: "Easy",
+    days:"4",
     price: "On Request",
     page:"hiking.html",
     desc: "Explore the Shivalik Hills of Nepal's Chure Range, where forested ridges, river valleys, and diverse wildlife create an authentic journey through the country's southern landscapes.",  },
@@ -128,7 +129,7 @@ const packages = [
     link_name:"angling",
     region: "Farwest Nepal",
     image: "images/packages/angling.webp",
-    days: "Custom",
+    days: "upto 4",
     page:"angling.html",
     difficulty: "Moderate",
     price: "On Request",
@@ -334,102 +335,7 @@ function observeReveals() {
 }
 
 /* ---- Form submission ----------------------------------------------------- */
-/* ---- Form submission ----------------------------------------------------- */
-function initForm() {
-  const form = document.getElementById("contactForm");
-  const submit = document.querySelector("#contactForm button[type='submit']");
-  const success = document.getElementById("formSuccess");
-  const error = document.getElementById("formError");
 
-  if (!form || !submit || !success || !error) {
-    console.error("Contact form elements not found.");
-    return;
-  }
-
-  form.querySelectorAll("input, select, textarea").forEach((field) => {
-    field.addEventListener("input", () => {
-      const fieldWrapper = field.closest(".field");
-
-      if (fieldWrapper) {
-        fieldWrapper.classList.remove("field--invalid");
-      }
-    });
-
-    field.addEventListener("change", () => {
-      const fieldWrapper = field.closest(".field");
-
-      if (fieldWrapper) {
-        fieldWrapper.classList.remove("field--invalid");
-      }
-    });
-  });
-
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    success.hidden = true;
-    error.hidden = true;
-
-    // Browser validation
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    submit.disabled = true;
-    submit.setAttribute("aria-busy", "true");
-    submit.textContent = "Sending...";
-
-    try {
-      const formData = new FormData(form);
-
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(Object.fromEntries(formData)),
-      });
-
-      console.log("Contact API status:", response.status);
-
-      if (!response.ok) {
-        let errorMessage = "Request failed.";
-
-        try {
-          const result = await response.json();
-
-          if (result && result.error) {
-            errorMessage = result.error;
-          }
-        } catch (jsonError) {
-          console.warn("API did not return JSON.");
-        }
-
-        throw new Error(errorMessage);
-      }
-
-      // Successful submission
-      form.reset();
-
-      success.hidden = false;
-      error.hidden = true;
-
-      console.log("Contact form submitted successfully.");
-
-    } catch (requestError) {
-      console.error("Contact form error:", requestError);
-
-      success.hidden = true;
-      error.hidden = false;
-
-    } finally {
-      submit.disabled = false;
-      submit.removeAttribute("aria-busy");
-      submit.textContent = "Request Booking";
-    }
-  });
-}
 /* ---- Init ---------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderPackages();
@@ -438,7 +344,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initFilters();
   initNav();
   initHeaderScroll();
-  initForm();
   observeReveals();
   document.getElementById("year").textContent = new Date().getFullYear();
 });
@@ -451,7 +356,6 @@ document.addEventListener("DOMContentLoaded", () => {
         var nav = document.getElementById("nav");
         var header = document.getElementById("header");
         document.getElementById("year").textContent = new Date().getFullYear();
-        navToggle.addEventListener("click", function () { var open = nav.classList.toggle("open"); navToggle.setAttribute("aria-expanded", String(open)); });
         nav.querySelectorAll("a").forEach(function (link) { link.addEventListener("click", function () { nav.classList.remove("open"); navToggle.setAttribute("aria-expanded", "false"); }); });
         window.addEventListener("scroll", function () { header.classList.toggle("scrolled", window.scrollY > 10); }, { passive: true });
         form.querySelectorAll("input, select, textarea").forEach(function (field) { field.addEventListener("input", function () { field.closest(".field").classList.remove("field--invalid"); }); });
