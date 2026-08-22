@@ -36,17 +36,20 @@ export default async function handler(req, res) {
       country,
       healthIssues,
       message,
+      optionalSafari,
     } = req.body || {};
 
     // Basic validation
     if (
+
       !fullName ||
       !email ||
       !phone ||
       !country ||
       !trek ||
       !travelDate ||
-      !travelers
+      !travelers || 
+      !optionalSafari
     ) {
       return res.status(400).json({
         error: "Please fill in all required fields."
@@ -66,7 +69,8 @@ export default async function handler(req, res) {
           travelers: Number(travelers),
           message: message || null,
           country:country,
-          health_issues: healthIssues || null
+          health_issues: healthIssues || null,
+          optionalSafari: optionalSafari,
 
         }
       ])
@@ -93,6 +97,7 @@ export default async function handler(req, res) {
     const safeTrek = escapeHtml(trek);
     const safeTravelDate = escapeHtml(travelDate);
     const safeTravelers = escapeHtml(travelers);
+    const safeOptionalSafari = escapeHtml(optionalSafari || "No").replace(/\n/g, "<br>");
     const safeMessage = escapeHtml(
       message || "No additional message provided."
     ).replace(/\n/g, "<br>");
@@ -134,6 +139,9 @@ export default async function handler(req, res) {
           <h3>Health Issues / Medical Information</h3>
           <p>${safeHealthIssues}</p>
 
+          <h3>Optional Safari</h3>
+          <p>${safeOptionalSafari}</p>
+          
           <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 24px 0;" />
 
           <p style="font-size: 13px; color: #667085;">
