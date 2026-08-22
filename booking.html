@@ -837,9 +837,6 @@
         // Returns an array of { id, message }. Empty = valid.
         function validate(values) {
           var errors = [];
-          if (!values.country) {
-            errors.push({ id: "country", message: "Please select your country of origin." });
-          }
           if (!values.fullName) {
             errors.push({ id: "fullName", message: "Please enter your full name." });
           }
