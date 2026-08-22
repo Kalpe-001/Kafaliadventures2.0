@@ -48,8 +48,7 @@ export default async function handler(req, res) {
       !country ||
       !trek ||
       !travelDate ||
-      !travelers || 
-      !optionalSafari
+      !travelers
     ) {
       return res.status(400).json({
         error: "Please fill in all required fields."
@@ -70,7 +69,7 @@ export default async function handler(req, res) {
           message: message || null,
           country:country,
           health_issues: healthIssues || null,
-          optionalSafari: optionalSafari,
+          optional_safari: optionalSafari,
 
         }
       ])
