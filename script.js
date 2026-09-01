@@ -81,6 +81,17 @@ const packages = [
     page:"mustang.html",
     desc: "Known for its remarkable blend of rugged Himalayan landscapes, ancient Tibetan-influenced culture, historic villages, and unforgettable trails far beyond Nepal's busy trekking routes.",
   },
+  {
+  name: "Shuklaphanta Jeep Safari",
+  link_name: "jeepsafari",
+  region: "Far West Nepal",
+  image: "images/packages/jeepsafari.jpg",
+  days: 3,
+  difficulty: "Easy",
+  price: "On Request",
+  page: "jeepsafari.html",
+  desc: "A thrilling three-day jeep safari through Shuklaphanta's vast grasslands and forests, with opportunities to spot swamp deer, wild boar, birds, and other wildlife in the wild landscapes of Nepal's Far West."
+},
   /*
   {
     name: "Shuklaphanta Safari",
