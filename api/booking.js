@@ -104,7 +104,7 @@ export default async function handler(req, res) {
     // Send booking notification
     const { error: emailError } = await resend.emails.send({
       from: "Kafali Adventures <onboarding@resend.dev>",
-      to: [ "kafaliadventure444@gmail.com"],
+      to: ["kafaliadventure444@gmail.com"],
       subject: `New Booking Request — ${fullName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #172033;">
