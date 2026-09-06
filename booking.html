@@ -853,7 +853,9 @@
           if (!values.phone) {
             errors.push({ id: "phone", message: "Please enter a phone number we can reach you on." });
           }
-
+          if (!values.country) {
+            errors.push({ id: "country", message: "Please select your country." });
+          }
           if (!values.trek) {
             errors.push({ id: "trek", message: "Please select a trek or package." });
           }
